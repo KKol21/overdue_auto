@@ -42,7 +42,7 @@ if uploaded_file:
             st.download_button(
                 label="⬇️ Download updated Excel file",
                 data=output,
-                file_name="daily_report.xlsx",
+                file_name=f"Overdue list - {datetime.today().strftime("%Y-%m-%d")}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
 
