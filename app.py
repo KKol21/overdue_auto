@@ -15,10 +15,9 @@ if uploaded_file:
             df = pd.read_excel(uploaded_file)
             df['Due date'] = pd.to_datetime(df['Due date'], errors='coerce').dt.date
 
-            today = datetime.today().date()
-            df["Days late"] = (today - pd.to_datetime(df["Due date"])).dt.days
-
-            filtered = df[df['Days late'] >= 2].drop(columns=["Days late"])
+            df['Due date'] = pd.to_datetime(df['Due date'])
+            df["Days late"] = (datetime.today() - df["Due date"]).dt.days
+            filtered = df[df['Days late'] >= 2].drop(columns=["Days late"], axis=1)
             filtered = filtered[~filtered["Invoice"].astype(str).str.startswith("6")]
 
             # Optional: format 'Due date' for export
